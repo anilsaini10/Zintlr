@@ -14,8 +14,8 @@ const DetailsScreen = (props) => {
 
                 <Box width="100%" height="100%" mr="2">
                     <Image source={{
-                        uri: "https://wallpaperaccess.com/full/317501.jpg"
-                    }} alt="image" style={{ width: "100%", height: "100%" }} borderRadius="10" />
+                        uri: "https://www.marketingdirecto.com/wp-content/uploads/2022/10/Hacia-un-nuevo-modelo-de-distribucion-eficiente-y-sostenible.jpg"
+                    }} alt="image" style={{ width: "100%", height: "100%" }} resizeMode="contain" borderRadius="10" />
 
 
                     <Box width="100%" position="absolute" my="2" marginLeft={2} >
@@ -40,7 +40,7 @@ const DetailsScreen = (props) => {
                             </TouchableOpacity>
                         </View>
                         <View width="40%" justifyContent="flex-end" alignSelf="flex-end"  >
-                            <TouchableOpacity style={{ width: 12, height: 16, justifyContent: "center", borderRadius: 10, alignSelf: "flex-end" }} >
+                            <TouchableOpacity style={{ width: 20, height: 20, justifyContent: "center", borderRadius: 10, marginRight: 10, alignSelf: "flex-end" }} >
                                 <Image source={require("../assets/images/save.png")} alt="Image" />
                             </TouchableOpacity>
                         </View>

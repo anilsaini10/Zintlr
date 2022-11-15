@@ -9,12 +9,16 @@ import axios from "axios";
 
 const Home = (props) => {
 
+
+
     const [currentButton, setCurrentButton] = useState([true, false, false, false, false]);
     const [searchQuery, setSearchQuery] = useState("");
     const [refresh, setRefresh] = useState(true);
     const [allNews, setAllNews] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
+
+    // This function is used to show to current active button.
     const handleCurrentButton = (index) => {
 
         var temp = [false, false, false, false, false];
@@ -23,42 +27,58 @@ const Home = (props) => {
 
     };
 
-    const handleQuerySearch = (query) => {
+    // This function is used to get data(query) from child component (Vertical card).
+    const handleQuerySearch = (query, index) => {
+
         setSearchQuery(query);
-        console.log("QUERY =>", query)
+        console.log("QUERY =>", query);
         getAllNews();
+
     }
 
-    const getAllNews = () => {
+    const getAllNews = (index) => {
 
         const url = `https://newsapi.org/v2/everything?q=${searchQuery}&sortBy=publishedAt&apiKey=cb6796f66c304b3085737fa8df014f5f`;
+
+        // Make Activity Indicator true.
         setLoading(true);
 
         axios.get(url).then((res) => {
-                res = res.data.articles;
-                // res = res.articles;
-                console.log(res);
-                setAllNews(res);
-                setLoading(false);
-            }).catch(error  => {
-                console.log(error);
-            })
-        
+
+            res = res.data.articles;
+
+            console.log(res);
+
+            // update the new data.
+            setAllNews(res);
+
+            // Make Activity Indicator false.
+            setLoading(false);
+
+
+        }).catch(error => {
+
+            console.log(error);
+
+        })
+
         setRefresh(!refresh);
 
     }
 
     useEffect(() => {
+
         getAllNews();
+
     }, [])
 
 
-    const arr = [{ "name": "All", "b": 2 }, { "name": "Android", "b": 2 }, { "name": "Cricket", "b": 2 }, { "name": "Iphone", "b": 2 }, { "name": "Google", "b": 2 }]
+    const arr = [{ "name": "All" }, { "name": "Android" }, { "name": "Cricket" }, { "name": "Iphone" }, { "name": "Google" }]
 
 
     return (
         <>
-            {loading ? (
+            {!loading ? (
                 <View flex={1} justifyContent="center" >
                     <ActivityIndicator size="large" color="tomato" />
                     <Text color="tomato" alignSelf="center" >Loading...</Text>
@@ -86,7 +106,7 @@ const Home = (props) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => { handleCurrentButton(index); setSearchQuery(item.name); getAllNews(); }}
+                                                onPress={() => { handleCurrentButton(index); setSearchQuery(item.name); getAllNews(index); }}
                                                 style={{ height: 30, justifyContent: "center", borderRadius: 10, backgroundColor: "white", marginHorizontal: 4 }} >
                                                 <Text alignSelf="center" color="black" fontSize="15px" fontWeight="400" px={8}>{item.name}</Text>
                                             </TouchableOpacity>
@@ -134,7 +154,7 @@ export default Home;
 
 const styles = StyleSheet.create({
     buttonStyle: {
-        backgroundColor: '#fc454e',
+        backgroundColor: '#E56584',
         width: 140,
         height: 49,
         borderRadius: 150,
