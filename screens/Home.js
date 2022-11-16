@@ -78,7 +78,7 @@ const Home = (props) => {
 
     return (
         <>
-            {!loading ? (
+            {loading ? (
                 <View flex={1} justifyContent="center" >
                     <ActivityIndicator size="large" color="tomato" />
                     <Text color="tomato" alignSelf="center" >Loading...</Text>
